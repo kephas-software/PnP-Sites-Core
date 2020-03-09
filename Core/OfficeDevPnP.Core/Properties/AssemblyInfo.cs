@@ -1,51 +1,8 @@
-using System.Reflection;
-using System.Resources;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("OfficeDevPnP.Core")]
-#if SP2013
-[assembly: AssemblyDescription("Office Dev PnP Core library for SharePoint 2013")]
-#elif SP2016
-[assembly: AssemblyDescription("Office Dev PnP Core library for SharePoint 2016")]
-#elif SP2019
-[assembly: AssemblyDescription("Office Dev PnP Core library for SharePoint 2019")]
-#else
-[assembly: AssemblyDescription("Office Dev PnP Core library for SharePoint Online")]
-#endif
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OfficeDevPnP.Core")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2020")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: NeutralResourcesLanguage("en-US")]
-
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("065331b6-0540-44e1-84d5-d38f09f17f9e")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// Convention:
-// Major version = current version 3 (released as of Aug 2018)
-// Minor version = Sequence...version 0 was with Aug 2018 release, 1 = Sept, 2 = Oct,...
-// Third part = version indenpendant showing the release month in YYMM
-// Fourth part = 0 normally or a sequence number when we do an emergency release
-[assembly: AssemblyVersion("3.18.2002.0")]
-[assembly: AssemblyFileVersion("3.18.2002.0")]
-
-[assembly: InternalsVisibleTo("OfficeDevPnP.Core.Tests")]
+[assembly: InternalsVisibleTo("OfficeDevPnP.Core.Tests, PublicKey=" +
+                              "0024000004800000940000000602000000240000525341310004000001000100fdab739edd4ea5" +
+                              "c0766b216b63d793c3edb2698256569a25d95a3a777e9916fd1e24ed3c3eb979d795ea13bb410a" +
+                              "60cb04a790eaef446dea0ff1451bfa494a2966590c7216cf0a71833d78e0e08136f9fbfcf60882" +
+                              "92db83fff4b84d3c37e980ac44238d1b2c95855de6b8a216b91636f1449cc8d0271c60006ca3bd" +
+                              "695a83aa")]
