@@ -10,7 +10,7 @@
 
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 
-        <Version>3.18.2002-dev.18</Version>
+        <Version>3.18.2002</Version>
         <Authors>Microsoft</Authors>
         <Company>Microsoft</Company>
         <Product>OfficeDevPnP.Core</Product>
