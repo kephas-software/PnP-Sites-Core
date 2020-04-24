@@ -20,6 +20,7 @@ using OfficeDevPnP.Core.Utilities.Async;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using OfficeDevPnP.Core.Utilities.Context;
+using System.Web;
 
 namespace OfficeDevPnP.Core
 {
@@ -632,11 +633,12 @@ namespace OfficeDevPnP.Core
         /// <param name="siteUrl">Site for which the ClientContext object will be instantiated</param>
         /// <param name="userPrincipalName">The user id</param>
         /// <param name="userPassword">The user's password as a secure string</param>
+        /// <param name="environment">SharePoint environment being used</param>
         /// <returns>Client context object</returns>
-        public ClientContext GetAzureADCredentialsContext(string siteUrl, string userPrincipalName, SecureString userPassword)
+        public ClientContext GetAzureADCredentialsContext(string siteUrl, string userPrincipalName, SecureString userPassword, AzureEnvironment environment = AzureEnvironment.Production)
         {
             string password = new System.Net.NetworkCredential(string.Empty, userPassword).Password;
-            return GetAzureADCredentialsContext(siteUrl, userPrincipalName, password);
+            return GetAzureADCredentialsContext(siteUrl, userPrincipalName, password, environment);
         }
 
         /// <summary>
@@ -645,8 +647,9 @@ namespace OfficeDevPnP.Core
         /// <param name="siteUrl">Site for which the ClientContext object will be instantiated</param>
         /// <param name="userPrincipalName">The user id</param>
         /// <param name="userPassword">The user's password as a string</param>
+        /// <param name="environment">SharePoint environment being used</param>
         /// <returns>Client context object</returns>
-        public ClientContext GetAzureADCredentialsContext(string siteUrl, string userPrincipalName, string userPassword)
+        public ClientContext GetAzureADCredentialsContext(string siteUrl, string userPrincipalName, string userPassword, AzureEnvironment environment = AzureEnvironment.Production)
         {
             Log.Info(Constants.LOGGING_SOURCE, CoreResources.AuthenticationManager_GetContext, siteUrl);
             Log.Debug(Constants.LOGGING_SOURCE, CoreResources.AuthenticationManager_TenantUser, userPrincipalName);
@@ -660,7 +663,7 @@ namespace OfficeDevPnP.Core
 #endif
             clientContext.ExecutingWebRequest += (sender, args) =>
             {
-                EnsureAzureADCredentialsToken(resourceUri, userPrincipalName, userPassword);
+                EnsureAzureADCredentialsToken(resourceUri, userPrincipalName, userPassword, environment);
                 args.WebRequestExecutor.RequestHeaders["Authorization"] = "Bearer " + azureADCredentialsToken;
             };
 
@@ -684,13 +687,14 @@ namespace OfficeDevPnP.Core
         /// <param name="resourceUri">Resouce to request access for</param>
         /// <param name="username">User id</param>
         /// <param name="password">Password</param>
+        /// <param name="environment">SharePoint environment being used</param>
         /// <returns>Acces token</returns>
-        public static async Task<string> AcquireTokenAsync(string resourceUri, string username, string password)
+        public static async Task<string> AcquireTokenAsync(string resourceUri, string username, string password, AzureEnvironment environment)
         {
             HttpClient client = new HttpClient();
-            string tokenEndpoint = "https://login.microsoftonline.com/common/oauth2/token";
+            string tokenEndpoint = $"{new AuthenticationManager().GetAzureADLoginEndPoint(environment)}/common/oauth2/token";
 
-            var body = $"resource={resourceUri}&client_id=9bc3ab49-b65d-410a-85ad-de819febfddc&grant_type=password&username={username}&password={password}";
+            var body = $"resource={resourceUri}&client_id=9bc3ab49-b65d-410a-85ad-de819febfddc&grant_type=password&username={HttpUtility.UrlEncode(username)}&password={HttpUtility.UrlEncode(password)}";
             var stringContent = new StringContent(body, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
 
             var result = await client.PostAsync(tokenEndpoint, stringContent).ContinueWith<string>((response) =>
@@ -703,7 +707,7 @@ namespace OfficeDevPnP.Core
             return token;
         }
 
-        private void EnsureAzureADCredentialsToken(string resourceUri, string userPrincipalName, string userPassword)
+        private void EnsureAzureADCredentialsToken(string resourceUri, string userPrincipalName, string userPassword, AzureEnvironment environment)
         {
             if (azureADCredentialsToken == null)
             {
@@ -712,7 +716,7 @@ namespace OfficeDevPnP.Core
                     if (azureADCredentialsToken == null)
                     {
 
-                        String accessToken = Task.Run(() => AcquireTokenAsync(resourceUri, userPrincipalName, userPassword)).GetAwaiter().GetResult();
+                        String accessToken = Task.Run(() => AcquireTokenAsync(resourceUri, userPrincipalName, userPassword, environment)).GetAwaiter().GetResult();
                         ThreadPool.QueueUserWorkItem(obj =>
                         {
                             try
@@ -1019,7 +1023,7 @@ namespace OfficeDevPnP.Core
             {
                 case AzureEnvironment.Production:
                     {
-                        return "https://login.windows.net";
+                        return "https://login.microsoftonline.com";
                     }
                 case AzureEnvironment.Germany:
                     {
@@ -1039,7 +1043,7 @@ namespace OfficeDevPnP.Core
                     }
                 default:
                     {
-                        return "https://login.windows.net";
+                        return "https://login.microsoftonline.com";
                     }
             }
         }
