@@ -894,7 +894,6 @@ namespace OfficeDevPnP.Core
         }
 #endif
 
-#if !NETSTANDARD2_0
         /// <summary>
         /// Returns a SharePoint ClientContext using Azure Active Directory App Only Authentication. This requires that you have a certificated created, and updated the key credentials key in the application manifest in the azure AD accordingly.
         /// </summary>
@@ -912,9 +911,6 @@ namespace OfficeDevPnP.Core
 
             return GetAzureADAppOnlyAuthenticatedContext(siteUrl, clientId, tenant, cert, environment);
         }
-#endif
-
-#if !NETSTANDARD2_0
 
         /// <summary>
         /// Returns a SharePoint ClientContext using Azure Active Directory App Only Authentication. This requires that you have a certificated created, and updated the key credentials key in the application manifest in the azure AD accordingly.
@@ -932,9 +928,6 @@ namespace OfficeDevPnP.Core
 
             return GetAzureADAppOnlyAuthenticatedContext(siteUrl, clientId, tenant, certificatePath, certPassword, environment);
         }
-#endif
-
-#if !NETSTANDARD2_0
 
         /// <summary>
         /// Returns a SharePoint ClientContext using Azure Active Directory App Only Authentication. This requires that you have a certificated created, and updated the key credentials key in the application manifest in the azure AD accordingly.
@@ -960,9 +953,7 @@ namespace OfficeDevPnP.Core
 
             return GetAzureADAppOnlyAuthenticatedContext(siteUrl, clientId, tenant, cert, environment);
         }
-#endif
 
-#if !NETSTANDARD2_0
         /// <summary>
         /// Returns a SharePoint ClientContext using Azure Active Directory App Only Authentication. This requires that you have a certificated created, and updated the key credentials key in the application manifest in the azure AD accordingly.
         /// </summary>
@@ -1010,7 +1001,6 @@ namespace OfficeDevPnP.Core
 
             return clientContext;
         }
-#endif
 
         /// <summary>
         /// Get's the Azure AD login end point for the given environment
