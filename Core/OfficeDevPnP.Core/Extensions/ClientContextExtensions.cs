@@ -386,7 +386,9 @@ namespace Microsoft.SharePoint.Client
                             }
                             else
                             {
-                                newClientContext = authManager.GetAzureADAppOnlyAuthenticatedContext(newSiteUrl, contextSettings.ClientId, contextSettings.Tenant, contextSettings.ClientAssertionCertificate, contextSettings.Environment);
+                                // TODO check whether with newer versions the contextSettings.ClientAssertionCertificate exists.
+                                // newClientContext = authManager.GetAzureADAppOnlyAuthenticatedContext(newSiteUrl, contextSettings.ClientId, contextSettings.Tenant, contextSettings.ClientAssertionCertificate, contextSettings.Environment);
+                                throw new InvalidOperationException($"The contextSettings' type is {nameof(ClientContextType.AzureADCertificate)}, but no {nameof(contextSettings.Certificate)} is set into the contextSettings.");
                             }
                         }
                         else if(contextSettings.Type == ClientContextType.Cookie)
