@@ -10,7 +10,7 @@
 
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 
-		<Version>3.25.2009</Version>
+		<Version>3.25.2009.1</Version>
 		<Authors>Microsoft</Authors>
 		<Company>Microsoft</Company>
 		<Product>OfficeDevPnP.Core</Product>
@@ -324,6 +324,79 @@
 
 	<ItemGroup>
 		<None Include="pnp.ico" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\Assemblies\core\Microsoft.Office.Client.Policy.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.Office.Client.TranslationServices.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.Office.SharePoint.Tools.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.Online.SharePoint.Client.Tenant.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.ProjectServer.Client.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.DocumentManagement.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.Publishing.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.Runtime.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.Search.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.Search.Applications.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.Taxonomy.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.UserProfiles.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
+		<None Include="..\..\Assemblies\core\Microsoft.SharePoint.Client.WorkflowServices.dll" >
+			<PackagePath>lib\netstandard2.1</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+		</None>
 	</ItemGroup>
 
 </Project>
